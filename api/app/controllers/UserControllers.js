@@ -23,7 +23,7 @@ const login = (req, res) => {
         })
         .catch((error) => {
             const data = {
-                error
+                message: "Server error"
             };
 
             res.status(500);
@@ -31,18 +31,26 @@ const login = (req, res) => {
         });
 }
 
-const test = (req, res) => {
+const register = (req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
 
-    const data = {
-        "message": "Wow! It is working.",
-    }
+    const user = new User(req.body);
+    user.save()
+        .then((user) => {
+            res.status(200);
+            res.send(user);
+        })
+        .catch((error) => {
+            const data = {
+                message: "Server error"
+            };
 
-    res.status(200);
-    res.send(data);
+            res.status(500);
+            res.send(data);
+        });
 }
 
 module.exports = {
     login,
-    test,
+    register,
 }
