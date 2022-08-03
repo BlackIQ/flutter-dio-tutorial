@@ -13,11 +13,11 @@ const userModule = new Schema({
     },
     name: {
         type: String,
-        required: true
+        required: false
     },
     bio: {
         type: String,
-        required: true
+        required: false
     },
 }, {timestamps: true});
 
