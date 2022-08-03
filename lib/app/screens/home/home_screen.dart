@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_http_course/app/services/api.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  final DioClient _client = DioClient();
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +20,12 @@ class HomeScreen extends StatelessWidget {
       ),
       body: Center(
         child: ElevatedButton(
-          onPressed: () => test(),
+          onPressed: () => {
+            _client.register({
+              "username": "username",
+              "password": "password",
+            })
+          },
           child: const Text("Test API")
         ),
       ),
