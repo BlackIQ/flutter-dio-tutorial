@@ -12,6 +12,6 @@ app.use(cors());
 
 app.set('json spaces', 2);
 
-app.use('/api', UserRoutes);
+app.use('/api/user', UserRoutes);
 
 module.exports = app;
