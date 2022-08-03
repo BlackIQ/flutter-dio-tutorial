@@ -31,6 +31,18 @@ const login = (req, res) => {
         });
 }
 
+const test = (req, res) => {
+    res.header("Access-Control-Allow-Origin", "*");
+
+    const data = {
+        "message": "Wow! It is working.",
+    }
+
+    res.status(200);
+    res.send(data);
+}
+
 module.exports = {
     login,
+    test,
 }
