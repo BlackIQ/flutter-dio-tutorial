@@ -7,31 +7,31 @@ class DioClient {
 
   final _baseUrl = 'http://192.168.1.5:8000/api';
 
-  void login(Map data) async {
+  Future<int> login(Map data) async {
     Response response;
 
     try {
       response = await _dio.post('$_baseUrl/user/login', data: data);
 
-      print(response.data);
+      return 200;
     } on DioError catch (e) {
       response = e.response!;
 
-      print(response.data['message']);
+      return 401;
     }
   }
 
-  void register(Map data) async {
+  Future<int> register(Map data) async {
     Response response;
 
     try {
       response = await _dio.post('$_baseUrl/user/register', data: data);
 
-      print(response.data);
+      return 200;
     } on DioError catch (e) {
       response = e.response!;
 
-      print(response.data['message']);
+      return 401;
     }
   }
 }
