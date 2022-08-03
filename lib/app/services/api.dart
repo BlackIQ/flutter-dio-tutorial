@@ -1,23 +1,37 @@
 import 'dart:convert';
-import 'package:http/http.dart' as http;
+import 'dart:developer';
+import 'package:dio/dio.dart';
 
-void login(String username, String password) {
-  Map data = {
-    "username": username,
-    "password": password
-  };
+class DioClient {
+  final Dio _dio = Dio();
 
-  var url = Uri.parse('http://192.168.1.5:8000/api/user/login');
-  var response = http.post(url, body: data);
+  final _baseUrl = 'http://192.168.1.5:8000/api';
 
-  print(response);
-}
+  void login(Map data) async {
+    Response response;
 
-void test() async {
-  var url = Uri.parse('http://192.168.1.5:8000/api/user/test');
-  var response = await http.get(url);
+    try {
+      response = await _dio.post('$_baseUrl/user/login', data: data);
 
-  var data = jsonDecode(response.body);
+      print(response.data);
+    } on DioError catch (e) {
+      response = e.response!;
 
-  print("hello");
+      print(response.data['message']);
+    }
+  }
+
+  void register(Map data) async {
+    Response response;
+
+    try {
+      response = await _dio.post('$_baseUrl/user/register', data: data);
+
+      print(response.data);
+    } on DioError catch (e) {
+      response = e.response!;
+
+      print(response.data['message']);
+    }
+  }
 }
