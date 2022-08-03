@@ -21,7 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Center(
         child: ElevatedButton(
           onPressed: () => {
-            _client.register({
+            _client.login({
               "username": "username",
               "password": "password",
             })
