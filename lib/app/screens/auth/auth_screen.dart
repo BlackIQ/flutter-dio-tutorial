@@ -19,7 +19,7 @@ class _AuthScreenState extends State<AuthScreen> {
   final TextEditingController _username = TextEditingController();
   final TextEditingController _password = TextEditingController();
 
-  void _auth(BuildContext context) {
+  Future<void> _auth(BuildContext context) async {
     setState(() => btnLoading = true);
 
     var res = login ? _client.login(_username.text, _password.text) : _client.register(_username.text, _password.text);
@@ -31,7 +31,32 @@ class _AuthScreenState extends State<AuthScreen> {
         var data = result.data;
         Provider.of<AppState>(context, listen: false).loginAuth(data);
       } else {
-        print("error");
+        var error = result.data;
+
+        return showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: const Text("Sorry, an error occurred"),
+              content: SingleChildScrollView(
+                child: ListBody(
+                  children: <Widget>[
+                    Text(error['message']),
+                  ],
+                ),
+              ),
+              actions: <Widget>[
+                TextButton(
+                  child: const Text('Close'),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            );
+          }
+        );
       }
     });
   }
@@ -50,7 +75,7 @@ class _AuthScreenState extends State<AuthScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Center(
+            const Center(
               child: Text(
                 "Contrinue to app",
                 style: TextStyle(
@@ -63,7 +88,7 @@ class _AuthScreenState extends State<AuthScreen> {
             const SizedBox(height: 20),
             TextField(
               controller: _username,
-              obscureText: false,
+              obscureText: true,
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),
                 label: Text("Username"),
