@@ -12,7 +12,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   void _logout(BuildContext context) {
-    Provider.of<AppState>(context, listen: false).logooutAuth();
+    Provider.of<AppState>(context, listen: false).logoutAuth();
   }
   
   @override
@@ -22,10 +22,18 @@ class _HomeScreenState extends State<HomeScreen> {
         elevation: 0,
         title: const Text("Welcome")
       ),
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () => _logout(context),
-          child: const Text("Logout")
+      body: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          children: [
+            ElevatedButton(
+              onPressed: () => _logout(context),
+              child: const Text("Logout"),
+            ),
+            Text(
+              Provider.of<AppState>(context).getId
+            ),
+          ],
         ),
       ),
     );
