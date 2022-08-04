@@ -27,7 +27,7 @@ class DioClient {
     }
   }
 
-  Future<Response>  register(String username, String password) async {
+  Future<Response> register(String username, String password) async {
     Map data = {
       "username": username,
       "password": password,
