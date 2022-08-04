@@ -14,12 +14,12 @@ const userModule = new Schema({
     name: {
         type: String,
         required: false,
-        default: "",
+        default: null,
     },
     bio: {
         type: String,
         required: false,
-        default: "",
+        default: null,
     },
 }, {timestamps: true});
 
