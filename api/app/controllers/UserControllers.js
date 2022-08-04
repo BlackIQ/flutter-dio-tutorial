@@ -47,7 +47,22 @@ const register = (req, res) => {
 }
 
 const update = (req, res) => {
-    res.send({message: "hi"});
+    const uid = req.body.uid;
+    const data = req.body.data;
+
+    User.findByIdAndUpdate(uid, data)
+        .then((result) => {
+            res.status(200);
+            res.send(result);
+        })
+        .catch((error) => {
+            const data = {
+                message: "Server error"
+            };
+
+            res.status(500);
+            res.send(data);
+        });
 }
 
 const users = (req, res) => {
