@@ -27,7 +27,7 @@ class DioClient {
     }
   }
 
-  void register(String username, String password) async {
+  Future<Response>  register(String username, String password) async {
     Map data = {
       "username": username,
       "password": password,
@@ -38,11 +38,11 @@ class DioClient {
     try {
       response = await _dio.post('$_baseUrl/user/register', data: data);
 
-      print(response);
+      return response;
     } on DioError catch (e) {
       response = e.response!;
 
-      print(response);
+      return response;
     }
   }
 }
