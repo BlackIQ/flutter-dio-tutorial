@@ -13,12 +13,8 @@ const login = (req, res) => {
                 res.status(401);
                 res.send(data);
             } else {
-                const data = {
-                    user
-                };
-
                 res.status(200);
-                res.send(data);
+                res.send(user);
             }
         })
         .catch((error) => {
