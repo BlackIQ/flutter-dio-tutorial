@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_http_course/app/services/api.dart';
-
 import 'package:flutter_http_course/app/services/state.dart';
 import 'package:provider/provider.dart';
 
@@ -14,8 +13,23 @@ class AuthScreen extends StatefulWidget {
 class _AuthScreenState extends State<AuthScreen> {
   final DioClient _client = DioClient();
 
+  bool btnLoading = false;
+
   void _login(BuildContext context) {
-    Provider.of<AppState>(context, listen: false).loginAuth();
+    setState(() => btnLoading = true);
+
+    var res = _client.login("amir", "ali");
+
+    res.then((result) {
+      setState(() => btnLoading = false);
+      
+      if (result.statusCode == 200) {
+        var data = result.data;
+        Provider.of<AppState>(context, listen: false).loginAuth(data["_id"]);
+      } else {
+        print("error");
+      }
+    });
   }
 
   @override
@@ -27,7 +41,7 @@ class _AuthScreenState extends State<AuthScreen> {
       ),
       body: Center(
         child:ElevatedButton(
-          onPressed: () => _login(context),
+          onPressed: btnLoading ? null : () => _login(context),
           child: const Text("Test API")
         ),
       ),
