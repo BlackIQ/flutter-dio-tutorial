@@ -1,16 +1,44 @@
-# flutter_http_course
+# Flutter + API tutorial
 
-Here we are going to learn using APIs in Flutter!
+In this project we learn how to use **RESTFUL API**s in Flutter. With APIs you can create network requests and do something with that.
 
-## Getting Started
+## Flutter
 
-This project is a starting point for a Flutter application.
+### Dio
 
-A few resources to get you started if this is your first Flutter project:
+**Dio** is a Dart package you can use for APIs in Flutter. There are similar packages like **HTTP** and **Chopper**. I used **Dio** cause it is really simple and fast!
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+For more information, head over to [Dio page](https://pub.dev/packages/dio).
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### Provider
+
+**Provider** is a state management that you can store your application state with it. We have **Redux** in ReactJs if you are familiar with.
+
+For more information, head over to [Provider page](https://pub.dev/packages/provider).
+
+### How to run
+
+To run Flutter application, just clone this repository, go inside it, and run `flutter run`.
+
+## API - Back-End
+
+I created the API with **NodeJs**. It is stored in `api` directory.
+
+### API Endpoints
+
+| Method | Route | Details |
+|--|--| -- |
+| POST | `/api/user/login` | Login user |
+| POST | `/api/user/register` | Register user |
+| PUT | `/api/user/change` | Update user data |
+| GET | `/api/user/get/users` | Get all users |
+| GET | `/api/user/get/user/:uid` | Get user date |
+
+### How to run
+
+We assume that you cloned repository. Next, go inside repository and `api` directory. Now run following commands:
+
+```shell
+$ npm i
+$ npm test
+```
