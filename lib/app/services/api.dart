@@ -45,4 +45,32 @@ class DioClient {
       return response;
     }
   }
+
+  Future<Response> getUsers() async {
+    Response response;
+
+    try {
+      response = await _dio.get('$_baseUrl/user/get/users');
+
+      return response;
+    } on DioError catch (e) {
+      response = e.response!;
+
+      return response;
+    }
+  }
+
+  Future<Response> getUser(String id) async {
+    Response response;
+
+    try {
+      response = await _dio.get('$_baseUrl/user/get/user/$id');
+
+      return response;
+    } on DioError catch (e) {
+      response = e.response!;
+
+      return response;
+    }
+  }
 }
