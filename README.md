@@ -22,7 +22,7 @@ To run Flutter application, just clone this repository, go inside it, and run `f
 
 ## API - Back-End
 
-I created the API with **NodeJs**. It is stored in `api` directory.
+I created the API with **NodeJs**. It is stored in `api` directory. It is kind of a **MERN** ( MongoDB, ExpressJs, ReactJs, NodeJs ) application. But there is no ReactJs for this project. I think we can call it **MEFN** ( MongoDB, ExpressJs, Flutter, NodeJs )!
 
 ### API Endpoints
 
