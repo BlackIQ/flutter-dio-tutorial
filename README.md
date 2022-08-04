@@ -34,6 +34,10 @@ I created the API with **NodeJs**. It is stored in `api` directory.
 | GET | `/api/user/get/users` | Get all users |
 | GET | `/api/user/get/user/:uid` | Get user date |
 
+### MVC
+
+Yeah, it is **MVC**. No more information.
+
 ### How to run
 
 We assume that you cloned repository. Next, go inside repository and `api` directory. Now run following commands:
