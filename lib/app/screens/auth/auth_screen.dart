@@ -88,7 +88,7 @@ class _AuthScreenState extends State<AuthScreen> {
             const SizedBox(height: 20),
             TextField(
               controller: _username,
-              obscureText: true,
+              obscureText: false,
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),
                 label: Text("Username"),
