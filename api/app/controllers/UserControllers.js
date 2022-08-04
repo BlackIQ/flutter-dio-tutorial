@@ -46,7 +46,46 @@ const register = (req, res) => {
         });
 }
 
+const update = (req, res) => {
+    res.send({message: "hi"});
+}
+
+const users = (req, res) => {
+    User.find()
+        .then((users) => {
+            res.status(200);
+            res.send(users);
+        })
+        .catch((error) => {
+            const data = {
+                message: "Server error"
+            };
+
+            res.status(500);
+            res.send(data);
+        });
+}
+
+const user = (req, res) => {
+    User.findById(req.params.user_id)
+        .then((user) => {
+            res.status(200);
+            res.send(user);
+        })
+        .catch((error) => {
+            const data = {
+                message: "Server error"
+            };
+
+            res.status(500);
+            res.send(data);
+        });
+}
+
 module.exports = {
     login,
     register,
+    update,
+    users,
+    user,
 }
