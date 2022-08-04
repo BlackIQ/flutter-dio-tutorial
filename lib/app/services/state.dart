@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class AppState extends ChangeNotifier {
-  bool _auth = true;
-  Map _user = { "_id": "50", "name": "amir" };
-  String _id = "50";
+  bool _auth = false;
+  Map _user = {};
+  String _id = "";
 
   bool get getAuth {
     return _auth;
