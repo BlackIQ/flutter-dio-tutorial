@@ -5,7 +5,7 @@ import 'package:flutter_http_course/app/services/state.dart';
 import 'package:provider/provider.dart';
 
 class SearchTab extends StatefulWidget {
-  SearchTab({Key? key}) : super(key: key);
+  const SearchTab({Key? key}) : super(key: key);
 
   @override
   State<SearchTab> createState() => _SearchTabState();
@@ -22,7 +22,7 @@ class _SearchTabState extends State<SearchTab> {
     res.then((result) {
       if (result.statusCode == 200) {
         var data = result.data;
-        setState(() => users = data);
+        setState(() => users = data.reversed.toList());
       }
     });
   }
@@ -57,6 +57,7 @@ class _SearchTabState extends State<SearchTab> {
           ),
         ),
         const Divider(),
+        const SizedBox(height: 10),
         users.isNotEmpty
         ?
         Expanded(
@@ -64,7 +65,7 @@ class _SearchTabState extends State<SearchTab> {
               itemCount: users.length,
               itemBuilder: (BuildContext context, int index) {
                 return ListTile(
-                  title: Text(users[index]["name"].toString()),
+                  title: Text(users[index]["name"] != "" ? users[index]["name"] : "Name is not set"),
                   subtitle: Text(users[index]["username"]),
                   onTap: () {},
                 );
