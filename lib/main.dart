@@ -12,12 +12,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider.value(
-          value: AppState(),
-        )
-      ],
+    return ChangeNotifierProvider<AppState>(
+      create: (context) => AppState(),
       child: MaterialApp(
         title: 'APIs in Flutter',
         debugShowCheckedModeBanner: false,
