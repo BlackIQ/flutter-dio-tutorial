@@ -21,10 +21,16 @@ class AppState extends ChangeNotifier {
     _user = user;
     notifyListeners();
   }
+  
   void logoutAuth() {
     _auth = false;
     _id = "";
     _user = {};
+    notifyListeners();
+  }
+
+  void setUser(Map user) {
+    _user = user;
     notifyListeners();
   }
 }
