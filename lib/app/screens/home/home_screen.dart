@@ -25,17 +25,17 @@ class _HomeScreenState extends State<HomeScreen> {
       {
         "title": "Home",
         "icon": const Icon(Icons.home),
-        "widget": HomeTab(),
+        "widget": const HomeTab(),
       },
       {
         "title": "Search",
         "icon": const Icon(Icons.search),
-        "widget": SearchTab(),
+        "widget": const SearchTab(),
       },
       {
         "title": "Settings",
         "icon": const Icon(Icons.settings),
-        "widget": SettingsTab(),
+        "widget": const SettingsTab(),
       }
     ];
 
