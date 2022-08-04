@@ -1,29 +1,57 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_http_course/app/services/api.dart';
 
 import 'package:flutter_http_course/app/services/state.dart';
 import 'package:provider/provider.dart';
 
 class SettingsTab extends StatefulWidget {
-  SettingsTab({Key? key}) : super(key: key);
+  const SettingsTab({Key? key}) : super(key: key);
 
   @override
   State<SettingsTab> createState() => _SettingsTabState();
 }
 
 class _SettingsTabState extends State<SettingsTab> {
+  final DioClient _client = DioClient();
+
+  Map _user = {};
+
+  void updateUser(BuildContext context) {
+    var res = _client.getUser(Provider.of<AppState>(context, listen: true).getId);
+    
+    res.then((result) {
+      if (result.statusCode == 200) {
+        var data = result.data;
+        Provider.of<AppState>(context, listen: false).setUser(data);
+        setState(() => _user = data);
+      }
+    });
+  }
+
   final TextEditingController _name = TextEditingController();
   final TextEditingController _bio = TextEditingController();
 
   Future<void> _update(BuildContext context) async {
-    print("update");
+    Map data = {
+      "uid": _user["_id"],
+      "data": {
+        "name": _name.text,
+        "bio": _bio.text,
+      }
+    };
+
+    var res = _client.updateUser(data);
+
+    res.then((result) {
+      if (result.statusCode == 200) {
+        print("Data updated");
+      }
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    var _user = Provider.of<AppState>(context).getUser;
-
-    print(_user);
-    
+    updateUser(context);
     return Padding(
       padding: const EdgeInsets.all(20),
       child: Column(
@@ -67,7 +95,6 @@ class _SettingsTabState extends State<SettingsTab> {
           const SizedBox(height: 10),
           TextField(
               controller: _name,
-              obscureText: true,
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),
                 label: Text("Name"),
@@ -77,7 +104,6 @@ class _SettingsTabState extends State<SettingsTab> {
             const SizedBox(height: 10),
             TextField(
               controller: _bio,
-              obscureText: true,
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),
                 label: Text("Bio"),
