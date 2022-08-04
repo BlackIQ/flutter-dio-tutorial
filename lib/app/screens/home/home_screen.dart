@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+import 'package:flutter_http_course/app/screens/home/tabs/home_tab.dart';
+import 'package:flutter_http_course/app/screens/home/tabs/search_tab.dart';
+import 'package:flutter_http_course/app/screens/home/tabs/settings_tab.dart';
+
 import 'package:flutter_http_course/app/services/state.dart';
 import 'package:provider/provider.dart';
 
@@ -17,23 +21,50 @@ class _HomeScreenState extends State<HomeScreen> {
   
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        title: const Text("Welcome")
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          children: [
-            ElevatedButton(
+    List<Map<String, dynamic>> items = [
+      {
+        "title": "Home",
+        "icon": const Icon(Icons.home),
+        "widget": HomeTab(),
+      },
+      {
+        "title": "Search",
+        "icon": const Icon(Icons.search),
+        "widget": SearchTab(),
+      },
+      {
+        "title": "Settings",
+        "icon": const Icon(Icons.settings),
+        "widget": SettingsTab(),
+      }
+    ];
+
+    return DefaultTabController(
+      length: items.length,
+      child: Scaffold(
+        appBar: AppBar(
+          elevation: 0,
+          title: const Text("Welcome"),
+          // centerTitle: true,
+          actions: [
+            IconButton(
               onPressed: () => _logout(context),
-              child: const Text("Logout"),
-            ),
-            Text(
-              Provider.of<AppState>(context).getId
+              icon: const Icon(Icons.logout),
             ),
           ],
+          bottom: TabBar(
+            tabs: items.map((item) {
+              return Tab(
+                text: item["title"],
+                // icon: item["icon"],
+              );
+            }).toList(),
+          ),
+        ),
+        body: TabBarView(
+          children: items.map((item) {
+              return Container(child: item["widget"]);
+            }).toList(),
         ),
       ),
     );
