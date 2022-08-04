@@ -17,7 +17,7 @@ class Landing extends StatefulWidget {
 class _LandingState extends State<Landing> {
   @override
   Widget build(BuildContext context) {
-    var auth = Provider.of<AppState>(context, listen: false).getAuth;
+    var auth = Provider.of<AppState>(context, listen: true).getAuth;
     
     return auth ? const HomeScreen() : const AuthScreen();
   }
